@@ -1,0 +1,176 @@
+/* La Barak, boîte à coiffer — noir, blanc, gris, des courbes et un peu de mouvement */
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --grey-900: #262626;
+  --grey-600: #6e6e6e;
+  --grey-300: #cfcfcf;
+  --grey-100: #f2f2f2;
+
+  --display: "Syne", "Helvetica Neue", Arial, sans-serif;
+  --text: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --wrap: 1180px;
+  --ease: cubic-bezier(.2, .7, .1, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+body {
+  margin: 0; font-family: var(--text); font-size: 1.0625rem; line-height: 1.6;
+  color: var(--black); background: var(--white); -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--black); outline-offset: 4px; }
+.wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 20px; }
+.skip { position: absolute; left: -9999px; }
+.skip:focus { left: 16px; top: 16px; z-index: 100; background: var(--white); padding: 8px 12px; }
+
+/* ---------- Boutons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  font: inherit; font-weight: 600; line-height: 1.2; text-decoration: none;
+  padding: 14px 24px; border-radius: 999px; border: 1.5px solid var(--black); cursor: pointer;
+  transition: background-color .2s, color .2s;
+}
+.btn svg { width: 19px; height: 19px; flex: none; }
+.btn-black { background: var(--black); color: var(--white); }
+.btn-black:hover { background: var(--grey-900); }
+.btn-line { background: transparent; color: var(--black); }
+.btn-line:hover { background: var(--black); color: var(--white); }
+.btn-white { background: var(--white); color: var(--black); border-color: var(--white); }
+.btn-white:hover { background: transparent; color: var(--white); }
+.btn-lg { padding: 17px 30px; font-size: 1.1rem; }
+
+/* ---------- En-tête ---------- */
+.site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--grey-100); }
+.header-inner { display: flex; align-items: center; gap: 32px; min-height: 68px; }
+.brand { margin-right: auto; }
+.brand img { height: 44px; width: auto; }
+.nav { display: flex; gap: 28px; }
+.nav a { text-decoration: none; font-weight: 500; position: relative; }
+.nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 1.5px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease); }
+.nav a:hover::after { transform: scaleX(1); }
+.header-call { padding: 10px 18px; }
+
+/* ---------- Bandeau ---------- */
+.hero { position: relative; overflow: hidden; min-height: min(88vh, 780px); display: flex; align-items: center; }
+.strand { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+.strand path { fill: none; stroke-linecap: round; stroke-dasharray: 1800; stroke-dashoffset: 1800; animation: draw 2.6s var(--ease) forwards; }
+.strand-a { stroke: var(--black); stroke-width: 2.2; }
+.strand-b { stroke: var(--grey-600); stroke-width: 1.4; animation-delay: .15s !important; }
+.strand-c { stroke: var(--grey-300); stroke-width: 1; animation-delay: .3s !important; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+.hero-inner { position: relative; z-index: 1; padding-top: 72px; padding-bottom: 96px; }
+.hero-title {
+  margin: 0 0 28px; font-family: var(--display); font-weight: 800;
+  font-size: clamp(3.1rem, 10vw, 8.4rem); line-height: .92; letter-spacing: -.045em;
+}
+.hero-title .line { display: block; overflow: hidden; }
+.hero-title .line-in { padding-left: 1.1em; font-weight: 600; }
+.hero-title .line, .hero-lead, .hero-actions, .hero-note { animation: rise .9s var(--ease) both; }
+.hero-title .line-in { animation-delay: .08s; }
+.hero-lead { animation-delay: .2s; }
+.hero-actions { animation-delay: .3s; }
+.hero-note { animation-delay: .38s; }
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+
+.hero-lead { margin: 0 0 32px; max-width: 42ch; font-size: clamp(1.1rem, 1.8vw, 1.3rem); color: var(--grey-900); background: rgba(255,255,255,.75); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.hero-note { margin: 18px 0 0; color: var(--grey-600); font-size: .95rem; }
+
+/* ---------- Bande défilante ---------- */
+.marquee { background: var(--black); color: var(--white); overflow: hidden; padding: 22px 0; }
+.marquee-track { display: flex; align-items: center; gap: 36px; width: max-content; animation: slide 38s linear infinite; }
+.marquee span { font-family: var(--display); font-weight: 600; font-size: clamp(1.6rem, 3.4vw, 2.6rem); letter-spacing: -.02em; white-space: nowrap; }
+.marquee i { width: 14px; height: 14px; border: 1.5px solid var(--white); border-radius: 50%; flex: none; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* ---------- Sections ---------- */
+.section { padding: 104px 0; }
+.title { margin: 0; font-family: var(--display); font-weight: 700; font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1; letter-spacing: -.035em; }
+
+.about-inner { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: start; }
+.about-text p { margin: 0 0 18px; font-size: 1.2rem; line-height: 1.55; max-width: 46ch; }
+.about-text p:last-child { margin: 0; color: var(--grey-600); }
+
+/* ---------- Prix : un menu de salon ---------- */
+.prices { background: var(--grey-100); border-radius: 48px 48px 0 0; }
+.prices-head { display: flex; justify-content: space-between; align-items: end; gap: 32px; flex-wrap: wrap; margin-bottom: 56px; }
+.prices-note { margin: 0; color: var(--grey-600); max-width: 40ch; }
+.menu { columns: 3 300px; column-gap: 48px; }
+.menu-cat, .menu-cta { break-inside: avoid; margin: 0 0 48px; }
+.menu-cat h3 { margin: 0 0 14px; font-family: var(--display); font-weight: 700; font-size: 1.5rem; letter-spacing: -.02em; }
+.menu dl { margin: 0; }
+.menu dl > div { display: flex; align-items: baseline; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--grey-300); }
+.menu dt { flex: 1; }
+.menu dt small { display: block; color: var(--grey-600); font-size: .85rem; }
+.menu dd { margin: 0; font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.menu-cta { background: var(--black); color: var(--white); padding: 32px 28px; border-radius: 160px 160px 24px 24px; text-align: center; }
+.menu-cta p { margin: 28px 0 22px; font-family: var(--display); font-size: 1.35rem; line-height: 1.2; letter-spacing: -.01em; }
+
+/* ---------- Équipe : portraits en arche, comme un miroir de salon ---------- */
+.team .title { margin-bottom: 56px; }
+.team-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.member:nth-child(2) { margin-top: 64px; }
+.arch { aspect-ratio: 3 / 4; border-radius: 999px 999px 18px 18px; overflow: hidden; background: var(--grey-100); margin-bottom: 22px; }
+.arch img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); transition: filter .5s var(--ease), transform .7s var(--ease); }
+.member:hover .arch img { filter: grayscale(0); transform: scale(1.03); }
+.member h3 { margin: 0; font-family: var(--display); font-size: 1.6rem; letter-spacing: -.02em; }
+.member .role { margin: 2px 0 12px; color: var(--grey-600); }
+.member p:last-child { margin: 0; max-width: 38ch; }
+.team-more { margin: 48px 0 0; color: var(--grey-600); }
+
+/* ---------- Visite ---------- */
+.visit { background: var(--black); color: var(--white); padding: 104px 0; border-radius: 48px 48px 0 0; }
+.visit-inner { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: start; }
+.visit-phone { display: block; margin: 28px 0 24px; font-family: var(--display); font-weight: 700; font-size: clamp(2.6rem, 7vw, 5.2rem); line-height: 1; letter-spacing: -.04em; text-decoration: none; }
+.visit-phone:hover { color: var(--grey-300); }
+.visit-address { margin: 0 0 24px; font-size: 1.15rem; }
+.visit-address a { text-decoration-color: var(--grey-600); text-underline-offset: 4px; }
+.visit-links { margin: 0; display: grid; gap: 6px; color: var(--grey-300); }
+.visit-links a { text-underline-offset: 4px; }
+.hours { width: 100%; border-collapse: collapse; font-size: 1.05rem; }
+.hours caption { text-align: left; font-family: var(--display); font-weight: 700; font-size: 1.5rem; margin-bottom: 14px; }
+.hours th, .hours td { padding: 12px 0; border-bottom: 1px solid var(--grey-900); text-align: left; font-weight: 400; }
+.hours td { text-align: right; }
+.hours small { display: block; color: var(--grey-600); }
+
+/* ---------- Pied de page ---------- */
+.site-footer { background: var(--black); color: var(--grey-600); padding: 0 0 36px; font-size: .95rem; }
+.footer-inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--grey-900); padding-top: 28px; }
+.site-footer p { margin: 0; }
+
+.callbar { display: none; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 860px) {
+  .nav { display: none; }
+  .header-call span { display: none; }
+  .hero { min-height: 0; }
+  .hero-inner { padding-top: 56px; padding-bottom: 72px; }
+  .hero-actions .btn { flex: 1 1 100%; }
+  .section, .visit { padding: 72px 0; }
+  .about-inner, .visit-inner { grid-template-columns: 1fr; gap: 28px; }
+  .prices, .visit { border-radius: 28px 28px 0 0; }
+  .team-grid { grid-template-columns: 1fr; gap: 48px; }
+  .member:nth-child(2) { margin-top: 0; }
+  .arch { max-width: 360px; }
+  .callbar {
+    display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(255,255,255,.95); backdrop-filter: blur(10px); border-top: 1px solid var(--grey-100);
+  }
+  .callbar .btn { width: 100%; padding: 15px; }
+  body { padding-bottom: 76px; }
+}
+
+/* Mouvement réduit : tout s'affiche immédiatement, rien ne défile */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .strand path { stroke-dashoffset: 0; }
+  .marquee-track { flex-wrap: wrap; width: auto; justify-content: center; }
+  .marquee-track > :nth-child(n+15) { display: none; }
+}
