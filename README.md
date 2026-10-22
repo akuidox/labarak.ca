@@ -4,13 +4,13 @@ Site une page en HTML/CSS pur, sans dépendances ni étape de build. Ce site n'a
 
 ## Mise en ligne
 
-1. **Images** : suivez `ASSETS.md`.
+1. **Images** : dans `public/assets/img/` (voir `ASSETS.md`).
 2. **GitHub** : créez un repo privé (ex. `labarak`) et poussez tout le dossier.
 3. **Cloudflare** : Workers & Pages → Créer → Importer un repo → `labarak.ca`.
    - Nom du projet : `labarak`
    - Commande de build : *(vide)*
    - Commande de déploiement : `npx wrangler deploy` (par défaut)
-   - La configuration est dans `wrangler.jsonc`. Les fichiers listés dans `.assetsignore` ne sont pas publiés.
+   - La configuration est dans `wrangler.jsonc` : seul le dossier `public/` est publié.
 4. **Domaine** : dans le projet → Paramètres → Domaines et routes → ajouter `labarak.ca` et `www.labarak.ca`.
 
 Ensuite, chaque `git push` redéploie le site automatiquement.
@@ -29,11 +29,9 @@ Le contenu vient de l'ancien site (2017-2018) :
 
 ## Fichiers
 
-- `index.html` — la page
-- `styles.css` — le style
-- `main.js` — année du pied de page
-- `404.html` — page introuvable
-- `_headers` — en-têtes de sécurité et de cache (Cloudflare Pages)
-- `_redirects` — redirige les anciennes URL WordPress
-- `robots.txt`, `sitemap.xml` — référencement
-- `wrangler.jsonc`, `.assetsignore` — configuration Cloudflare
+- `public/` — **le site publié** (tout ce qui est ici est en ligne)
+  - `index.html`, `styles.css`, `main.js`, `404.html`
+  - `assets/img/` — images
+  - `_headers`, `_redirects`, `robots.txt`, `sitemap.xml`
+- `wrangler.jsonc` — configuration Cloudflare
+- `README.md`, `ASSETS.md` — documentation (non publiée)

@@ -1,6 +1,0 @@
-# Fichiers du repo qui ne doivent pas être publiés sur le site
-.git
-wrangler.jsonc
-.assetsignore
-README.md
-ASSETS.md
