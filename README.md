@@ -6,11 +6,12 @@ Site une page en HTML/CSS pur, sans dépendances ni étape de build. Ce site n'a
 
 1. **Images** : suivez `ASSETS.md`.
 2. **GitHub** : créez un repo privé (ex. `labarak`) et poussez tout le dossier.
-3. **Cloudflare Pages** : Workers & Pages → Créer → Pages → Connecter à Git → choisir le repo.
-   - Framework : *None*
+3. **Cloudflare** : Workers & Pages → Créer → Importer un repo → `labarak.ca`.
+   - Nom du projet : `labarak`
    - Commande de build : *(vide)*
-   - Dossier de sortie : `/`
-4. **Domaine** : dans le projet Pages → Domaines personnalisés → ajouter `labarak.ca` et `www.labarak.ca`.
+   - Commande de déploiement : `npx wrangler deploy` (par défaut)
+   - La configuration est dans `wrangler.jsonc`. Les fichiers listés dans `.assetsignore` ne sont pas publiés.
+4. **Domaine** : dans le projet → Paramètres → Domaines et routes → ajouter `labarak.ca` et `www.labarak.ca`.
 
 Ensuite, chaque `git push` redéploie le site automatiquement.
 
@@ -35,3 +36,4 @@ Le contenu vient de l'ancien site (2017-2018) :
 - `_headers` — en-têtes de sécurité et de cache (Cloudflare Pages)
 - `_redirects` — redirige les anciennes URL WordPress
 - `robots.txt`, `sitemap.xml` — référencement
+- `wrangler.jsonc`, `.assetsignore` — configuration Cloudflare

@@ -1,0 +1,10 @@
+// Configuration Cloudflare : site 100 % statique, aucun code serveur.
+{
+  "name": "labarak",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./",
+    // Affiche 404.html quand une page n'existe pas
+    "not_found_handling": "404-page"
+  }
+}
